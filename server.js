@@ -11,7 +11,9 @@ var cheerio = require("cheerio");
 // Require all models
 var db = require("./models");
 
-var PORT = 3000;
+var PORT = process.env.PORT || 3000;
+var MONGODB_URI =
+  process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlines";
 
 // Initialize Express
 var app = express();
@@ -45,9 +47,9 @@ app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
 // Routes
 
-app.get("/", function(req, res) {
-  res.render("index");
-});
+// app.get("/", function(req, res) {
+//   res.render("index");
+// });
 
 // A GET route for scraping the echoJS website
 app.get("/scrape", function(req, res) {
